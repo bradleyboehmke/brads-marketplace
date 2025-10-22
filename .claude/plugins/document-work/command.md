@@ -12,12 +12,29 @@ Guide the user through an interactive conversation to:
 
 ### Step 1: Analyze Today's Work
 
-First, analyze the git repository to understand what work was done today:
-- Run `git log --since="today" --pretty=format:"%h - %s (%an)" --no-merges` to see today's commits
-- Run `git diff --name-only HEAD@{1.day.ago}..HEAD` to see changed files (or use appropriate method to see today's changes)
-- Summarize the work based on commits and file changes
+Analyze the work done in this session using multiple sources:
 
-If there are no commits today or the directory is not a git repository, inform the user and ask them to describe the work they did.
+**Primary Source - Claude Code Context:**
+- Review the conversation history in this Claude Code session
+- Identify key activities: code written, problems solved, features implemented
+- Note important decisions, discussions, and design choices
+- Extract specific technical details and outcomes
+- Identify challenges encountered and how they were resolved
+
+**Secondary Source - Git Repository:**
+- Run `git log --since="today" --pretty=format:"%h - %s (%an)" --no-merges` to see today's commits
+- Run `git diff --name-only HEAD@{1.day.ago}..HEAD` to see changed files
+- Use git data to supplement and validate the Claude conversation analysis
+
+**Synthesis:**
+Combine both sources to create a comprehensive understanding of:
+- What was built/created
+- How it was approached
+- What challenges were faced
+- What decisions were made
+- What outcomes were achieved
+
+If there are no commits today or the directory is not a git repository, rely primarily on the Claude Code conversation context.
 
 ### Step 2: Select Organization
 
@@ -88,18 +105,57 @@ For example: `2025-10-21-labsmate-auth-enhancement.md`
 
 Wait for their response.
 
-### Step 6: Read Template and Fill It In
+### Step 6: Read Template and Propose Content
 
 Use the Read tool to read the selected template file from the templates directory.
 
-Then, go through an interactive conversation to fill in the template:
-1. Auto-fill fields you can determine:
-   - Date (today's date)
-   - Any information from git analysis (progress, work done, files changed)
-2. For required fields (check VALIDATION RULES comments in template):
-   - Ask the user for each required field
-   - Wait for response before moving to next field
-3. Explain to the user what you've pre-filled and what still needs their input
+Then, intelligently generate content for each template field based on your git analysis:
+
+**Content Generation Strategy:**
+1. Use the Claude Code conversation history as the PRIMARY source for understanding the work
+2. Supplement with git commits, changed files, and commit messages
+3. For each template section, generate thoughtful, specific content based on the combined analysis
+4. Present the proposed content to the user and ask if they want to:
+   - **Accept** (default - just press Enter)
+   - **Edit** (provide modified version)
+   - **Add to it** (append additional information)
+
+**Field-by-Field Approach:**
+- **Date field:** Auto-fill with today's date (no prompt needed)
+- **Title/Experiment Name:** Propose based on project name and work type from conversation
+- **Goal:** Extract from the conversation what the user was trying to achieve
+- **Approach/How:** Describe the technical approach based on:
+  - What was discussed in the Claude conversation
+  - Design decisions made during the session
+  - Tools and techniques used
+  - File changes and commit messages
+- **Results/Outcomes:** Summarize what was accomplished based on:
+  - Features/code that were successfully implemented
+  - Problems that were solved
+  - Artifacts that were created
+  - Any testing or validation performed
+- **Challenges/Blockers:** Extract from conversation any difficulties encountered and how they were resolved
+- **Next Steps:** Identify any TODOs, future work, or follow-ups mentioned in the conversation
+- **Other template-specific fields:** Generate relevant content based on both conversation and git context
+
+**Presentation Format:**
+For each field, show:
+```
+[Field Name]:
+Proposed content here...
+
+Accept this? (Press Enter to accept, or type your changes)
+```
+
+**Important:**
+- Make proposals specific and detailed, not generic
+- Base proposals primarily on the Claude Code conversation context
+- Use git data (commits, files, messages) to supplement and validate
+- Capture the full richness of the work session: discussions, decisions, iterations, solutions
+- If you can't confidently propose content for a field, ask the user for input
+- Always explain what you're proposing and why
+- Default behavior is acceptance - make it easy to just hit Enter
+- The conversation history contains valuable context that git commits don't capture
 
 ### Step 7: Generate and Save Note
 
@@ -114,9 +170,14 @@ Once all required information is gathered:
 ## Important Notes
 
 - Be conversational and friendly
-- Don't rush - wait for user responses at each decision point
+- **Leverage the conversation history** - this is your richest source of information about what was done
+- Generate intelligent, specific content based on the full session context - don't be generic
+- Capture not just WHAT was done, but WHY and HOW based on the conversation
+- Make it easy for users to accept good proposals (just press Enter)
 - Use today's date in YYYY-MM-DD format for both the filename and date field
 - Read the actual template file to ensure you're using the correct structure
 - Pay attention to VALIDATION RULES in template comments to ensure required fields are filled
-- If git analysis fails, proceed anyway and gather information through conversation
+- Git commits supplement the conversation but shouldn't be the primary source
 - Keep the user informed about what you're doing at each step
+- The goal is to minimize user typing while maintaining quality and accuracy
+- You have full context of this work session - use it to create comprehensive documentation
