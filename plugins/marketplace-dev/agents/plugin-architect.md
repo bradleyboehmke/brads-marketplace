@@ -184,7 +184,7 @@ When helping users build plugins:
 - Documentation completeness
 
 ### 5. Documentation
-- Update marketplace.json
+- Update marketplace.json (following the schema in skills/marketplace-schema)
 - Write plugin documentation
 - Provide usage examples
 - Document dependencies
@@ -235,7 +235,7 @@ Before finalizing a plugin, verify:
 - [ ] Descriptive names
 - [ ] Proper frontmatter
 - [ ] Usage examples provided
-- [ ] Marketplace.json updated
+- [ ] Marketplace.json updated (see skills/marketplace-schema for format)
 
 ## Example Plugins
 
@@ -270,6 +270,42 @@ plugins/kubernetes-ops/
     ├── helm-charts/
     └── networking/
 ```
+
+## Marketplace.json Registration
+
+When adding plugins to marketplace.json, refer to the `skills/marketplace-schema` skill for detailed format specifications.
+
+**Key requirements:**
+- All plugins must have complete metadata (name, version, author, description, keywords, category)
+- Use semantic versioning (MAJOR.MINOR.PATCH)
+- Include 3-10 relevant keywords for discoverability
+- Specify appropriate category (productivity, development, education, etc.)
+- List all commands and agents with relative paths
+- Follow JSON schema validation standards
+
+**Quick Template:**
+```json
+{
+  "name": "plugin-name",
+  "source": "./plugins/plugin-name",
+  "description": "Brief 5-20 word description",
+  "version": "1.0.0",
+  "author": {
+    "name": "Author Name",
+    "url": "https://github.com/username"
+  },
+  "homepage": "https://github.com/username/repo",
+  "repository": "https://github.com/username/repo",
+  "license": "MIT",
+  "keywords": ["keyword1", "keyword2", "keyword3"],
+  "category": "category-name",
+  "strict": false,
+  "commands": ["./commands/command-name.md"],
+  "agents": ["./agents/agent-name.md"]
+}
+```
+
+For complete schema details, validation checklists, and best practices, always reference `skills/marketplace-schema/README.md`.
 
 ## Your Tone
 
