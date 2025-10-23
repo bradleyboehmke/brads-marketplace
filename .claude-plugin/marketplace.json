@@ -1,24 +1,99 @@
 {
   "name": "brads-marketplace",
-  "description": "Brad's personal collection of Claude Code plugins for documenting and managing work at 84.51 and University of Cincinnati",
   "owner": {
-    "name": "Brad Boehmke"
+    "name": "Brad Boehmke",
+    "email": "boehmkbc@gmail.com",
+    "url": "https://github.com/bradleyboehmke"
+  },
+  "metadata": {
+    "description": "Brad's personal collection of Claude Code plugins for documenting and managing work at 84.51 and University of Cincinnati",
+    "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "note-taker",
       "source": "./plugins/note-taker",
-      "description": "Automates note-taking by analyzing project work and creating structured notes using templates"
+      "description": "Automates note-taking by analyzing project work and creating structured notes using templates",
+      "version": "1.0.0",
+      "author": {
+        "name": "Brad Boehmke",
+        "url": "https://github.com/bradleyboehmke"
+      },
+      "homepage": "https://github.com/bradleyboehmke/brads-marketplace",
+      "repository": "https://github.com/bradleyboehmke/brads-marketplace",
+      "license": "MIT",
+      "keywords": [
+        "notes",
+        "documentation",
+        "templates",
+        "work-tracking"
+      ],
+      "category": "productivity",
+      "strict": false,
+      "commands": [
+        "./commands/document-work.md"
+      ],
+      "agents": [
+        "./agents/documentation-assistant.md"
+      ]
     },
     {
       "name": "marketplace-dev",
       "source": "./plugins/marketplace-dev",
-      "description": "Tools and expertise for building plugins that align with marketplace architecture"
+      "description": "Tools and expertise for building plugins that align with marketplace architecture",
+      "version": "1.0.0",
+      "author": {
+        "name": "Brad Boehmke",
+        "url": "https://github.com/bradleyboehmke"
+      },
+      "homepage": "https://github.com/bradleyboehmke/brads-marketplace",
+      "repository": "https://github.com/bradleyboehmke/brads-marketplace",
+      "license": "MIT",
+      "keywords": [
+        "plugin-development",
+        "marketplace",
+        "architecture",
+        "development"
+      ],
+      "category": "development",
+      "strict": false,
+      "commands": [
+        "./commands/design-plugin.md"
+      ],
+      "agents": [
+        "./agents/plugin-architect.md"
+      ]
     },
     {
       "name": "course-builder",
       "source": "./plugins/course-builder",
-      "description": "Create educational content for data science courses including chapters, quizzes, notebooks, and slides"
+      "description": "Create educational content for data science courses including chapters, quizzes, notebooks, and slides",
+      "version": "1.0.0",
+      "author": {
+        "name": "Brad Boehmke",
+        "url": "https://github.com/bradleyboehmke"
+      },
+      "homepage": "https://github.com/bradleyboehmke/brads-marketplace",
+      "repository": "https://github.com/bradleyboehmke/brads-marketplace",
+      "license": "MIT",
+      "keywords": [
+        "education",
+        "data-science",
+        "course-creation",
+        "teaching"
+      ],
+      "category": "education",
+      "strict": false,
+      "commands": [
+        "./commands/create-companion-nb.md",
+        "./commands/create-lab-nb.md",
+        "./commands/create-quiz.md",
+        "./commands/create-slides.md",
+        "./commands/write-chapter.md"
+      ],
+      "agents": [
+        "./agents/course-architect.md"
+      ]
     }
   ]
 }
