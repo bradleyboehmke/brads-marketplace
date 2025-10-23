@@ -1,0 +1,24 @@
+{
+  "name": "brads-marketplace",
+  "description": "Brad's personal collection of Claude Code plugins for documenting and managing work at 84.51 and University of Cincinnati",
+  "owner": {
+    "name": "Brad Boehmke"
+  },
+  "plugins": [
+    {
+      "name": "note-taker",
+      "source": "./plugins/note-taker",
+      "description": "Automates note-taking by analyzing project work and creating structured notes using templates"
+    },
+    {
+      "name": "marketplace-dev",
+      "source": "./plugins/marketplace-dev",
+      "description": "Tools and expertise for building plugins that align with marketplace architecture"
+    },
+    {
+      "name": "course-builder",
+      "source": "./plugins/course-builder",
+      "description": "Create educational content for data science courses including chapters, quizzes, notebooks, and slides"
+    }
+  ]
+}
