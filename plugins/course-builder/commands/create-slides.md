@@ -10,11 +10,24 @@ Generate presentation slides for teaching a course topic using the Quarto Reveal
 
 This command uses a numbered-option interactive workflow to gather requirements and create lecture slides.
 
-### Step 1: Course Selection
+### Step 1: Course Detection
 
-Ask the user which course these slides are for:
+Automatically detect the course based on the current working directory path:
 
+- Check if the path contains `uc-bana-4080` → BANA 4080
+- Check if the path contains `uc-bana-6043` → BANA 6043
+- Check if the path contains `uc-bana-7075` → BANA 7075
+
+**If course detected:**
 ```
+Detected course: BANA [X] from directory path
+Proceeding with [Course Name]...
+```
+
+**If no course detected:**
+```
+Unable to detect course from directory path.
+
 Which course are these slides for?
 
 [1] BANA 4080 (Intro to Data Mining - Undergraduate)
