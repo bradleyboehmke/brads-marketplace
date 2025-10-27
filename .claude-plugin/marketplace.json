@@ -89,7 +89,8 @@
         "./commands/create-lab-nb.md",
         "./commands/create-quiz.md",
         "./commands/create-slides.md",
-        "./commands/write-chapter.md"
+        "./commands/write-chapter.md",
+        "./commands/review-chapter.md"
       ],
       "agents": [
         "./agents/course-architect.md"
