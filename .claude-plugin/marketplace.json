@@ -58,7 +58,8 @@
       "category": "development",
       "strict": false,
       "commands": [
-        "./commands/design-plugin.md"
+        "./commands/create-plugin.md",
+        "./commands/validate-plugin.md"
       ],
       "agents": [
         "./agents/plugin-architect.md"
@@ -85,12 +86,14 @@
       "category": "education",
       "strict": false,
       "commands": [
+        "./commands/write-chapter.md",
+        "./commands/review-chapter.md",
         "./commands/create-companion-nb.md",
         "./commands/create-lab-nb.md",
         "./commands/create-quiz.md",
         "./commands/create-slides.md",
-        "./commands/write-chapter.md",
-        "./commands/review-chapter.md"
+        "./commands/create-module-overview.md",
+        "./commands/create-ta-guide.md"
       ],
       "agents": [
         "./agents/course-architect.md"

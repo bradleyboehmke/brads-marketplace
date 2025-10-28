@@ -69,6 +69,7 @@ This marketplace contains a collection of Claude Code plugins designed to stream
 **Skills:**
 - `architecture-principles/` - Deep knowledge of single responsibility, composability, context efficiency, and design patterns
 - `plugin-templates/` - Ready-to-use templates for agents and commands with detailed guidelines
+- `marketplace-schema/` - Schema and structure requirements for marketplace.json configuration
 
 **Features:**
 - Guides plugin design following single responsibility principle
@@ -128,10 +129,13 @@ This marketplace contains a collection of Claude Code plugins designed to stream
 
 **Commands:**
 - `/course-builder:write-chapter` - Write a textbook chapter for a specific course
-- `/course-builder:create-quiz` - Generate a quiz to assess student understanding
+- `/course-builder:review-chapter` - Review a textbook chapter for technical accuracy, clarity, tone, style, and grammar
 - `/course-builder:create-companion-nb` - Create a Jupyter notebook that accompanies a chapter
 - `/course-builder:create-lab-nb` - Generate a hands-on lab assignment notebook
+- `/course-builder:create-quiz` - Generate a quiz to assess student understanding
 - `/course-builder:create-slides` - Create presentation slides for a lecture
+- `/course-builder:create-module-overview` - Create a Canvas module overview document
+- `/course-builder:create-ta-guide` - Create TA guidance notebook with solutions and teaching strategies
 
 **Skills:**
 - `pedagogy/` - General data science teaching principles (hands-on learning, visual learning, incremental complexity)
@@ -139,6 +143,9 @@ This marketplace contains a collection of Claude Code plugins designed to stream
 - `courses/intro-to-data-mining/` - Course-specific profile for Intro to Data Mining (undergrad)
 - `courses/statistical-computing/` - Course-specific profile for Statistical Computing (grad)
 - `courses/ml-in-business/` - Course-specific profile for ML in Business (grad)
+- `courses/bana-4080/` - Course-specific profile for BANA 4080: Intro to Programming for Data Analytics (undergrad)
+- `courses/bana-6043/` - Course-specific profile for BANA 6043: Programming & Data Management (grad)
+- `courses/bana-7075/` - Course-specific profile for BANA 7075: MLOps in Practice (grad)
 
 **Features:**
 - Course-aware content creation (adapts to student level and prerequisites)
@@ -149,26 +156,34 @@ This marketplace contains a collection of Claude Code plugins designed to stream
 - Supports multiple courses with different audiences and philosophies
 
 **Token Efficiency:**
-- Commands: ~80 tokens each (workflow orchestration)
+- Commands: ~60-100 tokens each (workflow orchestration)
 - Agent: ~200 tokens (pedagogical expertise)
 - Pedagogy skill: ~400 tokens (general teaching principles)
 - Templates skill: ~600 tokens (content structures)
-- Course profiles: ~200 tokens each (loaded only for selected course)
+- Course profiles: ~200-400 tokens each (loaded only for selected course)
 - Total at rest: ~60 tokens (metadata only)
-- In use: 280-880 tokens depending on command and course
+- In use: 260-1200 tokens depending on command and course
 
 **Usage:**
 1. Run a command (e.g., `/course-builder:write-chapter`)
 2. The course-architect agent will:
-   - Ask which course (Intro to Data Mining, Statistical Computing, or ML in Business)
+   - Detect or ask which course (supports 6 courses across undergrad and grad levels)
    - Load the appropriate course profile
    - Ask for topic and parameters
    - Generate content appropriate for that course's:
      - Student level (undergrad vs grad)
-     - Technical stack (pandas/sklearn vs numpy/scipy vs MLflow/K8s)
+     - Technical stack (Python, R, cloud platforms, MLOps tools)
      - Learning philosophy (hands-on vs theory-driven vs applied)
      - Content style and depth
 3. Review and use the generated content
+
+**Supported Courses:**
+- **Intro to Data Mining** - Undergrad data mining with pandas/sklearn
+- **Statistical Computing** - Graduate statistical computing with numpy/scipy/R
+- **ML in Business** - Graduate applied ML with MLflow/Kubernetes
+- **BANA 4080** - Undergrad intro to programming for data analytics
+- **BANA 6043** - Graduate programming and data management
+- **BANA 7075** - Graduate MLOps in practice
 
 **Course Profiles:**
 Each course has a profile skill that defines:

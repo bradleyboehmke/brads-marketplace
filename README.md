@@ -33,55 +33,13 @@ brads-marketplace/
 
 ## Available Plugins
 
-### note-taker
+| Plugin | Description | Documentation |
+|--------|-------------|---------------|
+| **note-taker** | Automates note-taking by analyzing project work and creating structured notes using templates | [Details](docs/plugins.md#note-taker) |
+| **marketplace-dev** | Tools and expertise for building plugins that align with marketplace architecture | [Details](docs/plugins.md#marketplace-dev) |
+| **course-builder** | Create educational content for data science courses including chapters, quizzes, notebooks, and slides | [Details](docs/plugins.md#course-builder) |
 
-Creates structured notes from project work using pre-defined templates.
-
-**Usage:** `/note-taker:document-work`
-
-**What it does:**
-- Analyzes your Claude Code conversation history and git commits
-- Guides you through selecting the right template for your work
-- Intelligently proposes content for each template field based on your work
-- Saves the note to the appropriate location in your Notes directory
-
-**Key Features:**
-- Leverages conversation context as primary source of information
-- Supports multiple template types for different use cases
-- Interactive field-by-field content proposal and approval
-- Automatic filename generation with date stamps
-
-**Workflow:**
-1. Run `/note-taker:document-work` after completing your work
-2. Answer prompts about template and save location
-3. Review and approve (or edit) proposed content for each field
-4. Note is automatically saved with format: `YYYY-MM-DD-project-name.md`
-
-### marketplace-dev
-
-Tools and expertise for building plugins that align with marketplace architecture.
-
-**Usage:** `/marketplace-dev:create-plugin` or `/marketplace-dev:validate-plugin`
-
-**What it does:**
-- Guides you through creating new plugins following architecture principles
-- Validates existing plugins for compliance with best practices
-- Provides expert guidance on plugin design and structure
-- Includes comprehensive templates and examples
-
-**Key Features:**
-- Plugin Architect agent for design consultation
-- Interactive plugin scaffolding
-- Comprehensive architecture validation
-- Skills for architecture principles and templates
-- Ensures single responsibility and composability
-
-**Components:**
-- `plugin-architect` agent - Expert in marketplace architecture
-- `create-plugin` command - Scaffold new plugins interactively
-- `validate-plugin` command - Validate plugin compliance
-- `architecture-principles` skill - Deep knowledge of design patterns
-- `plugin-templates` skill - Ready-to-use templates
+For comprehensive information about each plugin, including features, commands, and usage examples, see the [Plugin Documentation](docs/plugins.md).
 
 ## Installation
 
