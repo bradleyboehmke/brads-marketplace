@@ -1,138 +1,328 @@
-# Usage Guide
+# ⚡️ Using Brad's Marketplace
 
-This guide explains how to install and use plugins from Brad's Marketplace.
+**Brad's Marketplace** provides a collection of Claude Code **agents**, **skills**, and **commands** that accelerate software development through workflow automation, documentation generation, and productivity tools.
 
-## Installation
+This guide walks through how to install the marketplace plugins and use them in your daily workflow.
 
-### Adding the Marketplace
+## 🧭 Quick Navigation
 
-To add this marketplace to your Claude Code installation:
+- **[Architecture Guide](./architecture.md)** - Design principles and component relationships
+- **[Plugins](./capabilities/plugins.md)** - What plugins are and how they work
+- **[Agents](./capabilities/agents.md)** - Domain expert personas
+- **[Skills](./capabilities/skills.md)** - Reusable knowledge modules
+- **[Commands](./capabilities/commands.md)** - User-facing workflows and syntax
 
-```bash
-/plugin marketplace add brads-marketplace
-```
-
-Or if installing from a local directory:
-
-```bash
-/plugin marketplace add /path/to/brads-marketplace
-```
-
-### Installing Plugins
-
-Once the marketplace is added, you can install specific plugins:
+## 🧩 Installation
 
 ```bash
-/plugin install note-taker
-```
+# Add the marketplace via GitHub
+claude plugin marketplace add https://github.com/bradleyboehmke/brads-marketplace
 
-To see all available plugins:
+# Or from a local directory
+claude plugin marketplace add /path/to/brads-marketplace
 
-```bash
+# Install the desired plugins
+claude plugin install git-workflow@brads-marketplace
+claude plugin install document-generator@brads-marketplace
+claude plugin install marketplace-dev@brads-marketplace
+claude plugin install note-taker@brads-marketplace
+claude plugin install course-builder@brads-marketplace
+
+# Start Claude and view the available plugins
+claude
 /plugin list
 ```
 
-## Using the note-taker Plugin
+> 💡 **Tip:** You can install all plugins or just the ones you need. Each plugin adds its own agents, skills, and commands to your Claude Code environment.
 
-The note-taker plugin helps you document your project work by creating structured notes based on templates.
+## 🔄 How the Marketplace Works
 
-### Basic Workflow
+The following diagram shows the end-to-end flow when using a marketplace plugin, from command invocation through analysis to final output delivery.
 
-1. **Complete your work** - Make commits, write code, have discussions with Claude Code
+```mermaid
+sequenceDiagram
+    actor User as 👤 User
+    participant CLI as Claude Code CLI
+    participant Cmd as 🎯 Command
+    participant Agent as 🤖 Agent
+    participant Skills as 🧠 Skills
+    participant Project as 📁 Your Project
+    participant Output as 📄 Output
 
-2. **Start the documentation process:**
-   ```bash
-   /note-taker:document-work
-   ```
+    User->>CLI: /git-workflow:draft-commit
+    CLI->>Cmd: Invoke command
 
-3. **Follow the interactive prompts:**
-   - The plugin will analyze today's git commits and conversation history
-   - Select your organization (84.51 or UC)
-   - Choose the appropriate template for your work type
-   - Select where to save the note
-   - Provide a project name for the filename
+    Note over Cmd: Parse args & validate context
 
-4. **Review proposed content:**
-   - The plugin will generate content for each template field based on:
-     - Your Claude Code conversation (primary source)
-     - Git commits and changes (supplementary)
-   - You can accept, edit, or add to each proposed field
-   - Simply press Enter to accept the default proposal
+    Cmd->>Agent: Activate git-workflow-specialist agent
 
-5. **Save the note:**
-   - The plugin will save your note to the appropriate location
-   - Format: `/Desktop/Notes/{org}/{subdirectory}/{YYYY-MM-DD}-{project-name}.md`
+    Note over Agent: Load role, persona, expertise
 
-### Tips for Best Results
+    Agent->>Skills: Load commit-message-standards skill
+    Agent->>Skills: Load github-workflow-patterns skill
 
-- **Use descriptive commit messages** - They help the plugin understand what you did
-- **Complete logical units of work** - Document after finishing a feature or task
-- **Leverage conversation context** - The plugin can see everything discussed in the Claude Code session
-- **Customize proposals** - Don't hesitate to edit the suggested content to add details
-- **Press Enter to accept** - If the proposal looks good, just hit Enter to move on
+    Note over Skills: Progressive loading<br/>(Tier 1 → Tier 2 → Tier 3)
 
-### Example Session
+    Skills-->>Agent: Return knowledge modules
 
-```
-You: /note-taker:document-work
+    Agent->>Project: Analyze git status
+    Project-->>Agent: Staged/unstaged changes
 
-Claude: I've analyzed your work today. I can see you:
-- Enhanced the document-work plugin with conversation context
-- Updated marketplace architecture
-- Made 2 commits with changes to 3 files
+    Agent->>Project: Check git log
+    Project-->>Agent: Recent commit history
 
-Which organization is this work for?
-1. 84.51
-2. UC
+    Note over Agent: Draft commit message<br/>following standards
 
-You: 1
+    Agent->>Cmd: Return commit message proposal
 
-Claude: Here are the available templates for 84.51:
-1. obj4-genai-coding-template.md
-2. build-log-template.md
-[... more templates ...]
+    Note over Cmd: Interactive approval
 
-Which template would you like to use?
+    Cmd->>Output: Display proposed message
+    Output->>User: Review and approve
 
-You: 1
+    User->>Cmd: Approve
+    Cmd->>Project: Execute git commit
+    Project-->>User: Commit created ✓
 
-[... continues with interactive prompts ...]
+    Note over User,Output: Command completed ✓
 ```
 
-## Customization
+**Understanding the Flow:**
 
-### Adding Custom Templates
+1. **User invokes a command** - Slash command with optional parameters
+2. **Command loads the agent** - Activates domain expert with specific expertise
+3. **Agent loads skills** - Pulls in required knowledge modules using progressive disclosure
+4. **Agent analyzes project** - Uses skill knowledge to examine context and draft output
+5. **Command handles interaction** - Manages user approval, file operations, or git commands
 
-To add your own templates:
+This architecture ensures:
+- **Consistency** - Same agent expertise applied across different commands
+- **Reusability** - Skills shared across multiple agents and plugins
+- **Efficiency** - Progressive loading minimizes token usage
+- **Flexibility** - Interactive workflows with user control
 
-1. Create a new template in `/Users/b294776/Desktop/Notes/templates/`
-2. Use the format: `{org}-{name}-template.md` (e.g., `8451-new-template.md`)
-3. Update the plugin's `document-work.md` command file to include your new template
+## 📦 Available Plugins
 
-### Adding New Subdirectories
+| Plugin | Description | Commands |
+|--------|-------------|----------|
+| **git-workflow** | Enforce standard Git and GitHub collaboration practices with automated workflow assistance | `/git-workflow:create-branch`<br>`/git-workflow:draft-commit`<br>`/git-workflow:draft-pr`<br>`/git-workflow:pre-commit-check`<br>`/git-workflow:spec-issue`<br>`/git-workflow:validate-commit`<br>`/git-workflow:validate-pr` |
+| **document-generator** | Create and maintain project documentation including READMEs, changelogs, ADRs, and diagrams | `/document-generator:generate-readme`<br>`/document-generator:update-readme`<br>`/document-generator:validate-readme`<br>`/document-generator:generate-changelog`<br>`/document-generator:update-changelog`<br>`/document-generator:validate-changelog`<br>`/document-generator:generate-adr`<br>`/document-generator:generate-architecture-diagram` |
+| **marketplace-dev** | Tools for developing new plugins that align with marketplace architecture | `/marketplace-dev:design-plugin`<br>`/marketplace-dev:review-plugin`<br>`/marketplace-dev:update-plugin-docs` |
+| **note-taker** | Automates note-taking by analyzing project work and creating structured notes using templates | `/note-taker:document-work` |
+| **course-builder** | Create educational content for data science courses including chapters, notebooks, quizzes, and slides | `/course-builder:write-chapter`<br>`/course-builder:review-chapter`<br>`/course-builder:create-companion-nb`<br>`/course-builder:create-lab-nb`<br>`/course-builder:create-quiz`<br>`/course-builder:create-slides`<br>`/course-builder:create-module-overview`<br>`/course-builder:create-ta-guide` |
 
-To add new save locations:
+## 🚀 Running Commands
 
-1. Create the subdirectory in `/Users/b294776/Desktop/Notes/{org}/`
-2. Update the plugin's `document-work.md` command file to include the new location
+Commands are invoked using slash command syntax. Navigate to your project directory first:
 
-## Troubleshooting
-
-### Plugin not found
-If the plugin isn't recognized after installation, try:
 ```bash
-/plugin refresh
+cd /path/to/your/project
+
+# Git workflow commands
+/git-workflow:create-branch
+/git-workflow:draft-commit
+/git-workflow:draft-pr
+/git-workflow:pre-commit-check
+
+# Generate documentation
+/document-generator:generate-readme
+/document-generator:generate-adr
+/document-generator:update-changelog
+
+# Document your work
+/note-taker:document-work
+
+# Create educational content
+/course-builder:write-chapter
+/course-builder:create-lab-nb
 ```
 
-### Git commands failing
-Ensure you're in a git repository when running the document-work command. The plugin works without git, but provides richer context when git history is available.
+For more specifics on command calls and available parameters, see the [Commands Reference](./capabilities/commands.md).
 
-### Template not found
-Verify that the template file exists in `/Users/b294776/Desktop/Notes/templates/` and that the filename matches exactly what's listed in the plugin.
+## 🔄 Common Workflows
 
-## Getting Help
+### Feature Development with Git Workflow
 
-For issues or questions:
-1. Check this documentation
-2. Review the plugin source code in `plugins/note-taker/`
-3. Open an issue in the marketplace repository
+Complete end-to-end workflow from branch creation to PR:
+
+```bash
+# Navigate to project
+cd /path/to/your/project
+
+# 1. Create feature branch (interactive - suggests branch name)
+/git-workflow:create-branch
+
+# 2. Transform GitHub issue into detailed implementation spec (optional)
+/git-workflow:spec-issue --issue=15
+
+# 3. Make your code changes
+# ... write code or ask Claude to implement...
+
+# 4. Run pre-commit quality checks (auto-detects files)
+/git-workflow:pre-commit-check
+
+# 5. Draft and create commit (auto-stages files if needed)
+/git-workflow:draft-commit
+
+# 6. Create pull request (generates standards-compliant PR)
+/git-workflow:draft-pr
+```
+
+**Result:** Interactive guidance through the entire feature development workflow with proper branch naming, quality checks, commit messages, and PR descriptions. No manual git staging required.
+
+**Additional Commands:**
+- `/git-workflow:validate-commit` - Validate existing commit message quality
+- `/git-workflow:validate-pr` - Validate PR quality before submitting
+
+### Documentation Generation
+
+Create and maintain project documentation:
+
+```bash
+# Navigate to project
+cd /path/to/your/project
+
+# Create README from scratch
+/document-generator:generate-readme
+
+# Create an Architecture Decision Record (interactive)
+/document-generator:generate-adr
+
+# Generate architecture diagram (interactive)
+/document-generator:generate-architecture-diagram
+
+# Generate a new CHANGELOG.md from git history
+/document-generator:generate-changelog
+
+# Update existing changelog with recent commits
+/document-generator:update-changelog
+
+# Validate changelog against standards
+/document-generator:validate-changelog
+```
+
+**Result:**
+- **README**: Comprehensive project documentation following best practices
+- **ADR**: MADR-compliant Architecture Decision Record
+- **Diagrams**: Mermaid diagrams for visualizing architecture
+- **Changelog**: Semantic or calendar versioning from git history
+
+### Note-Taking Workflow
+
+Document your work session with structured notes:
+
+```bash
+# After completing work in your project
+cd /path/to/your/project
+
+# Start documentation process
+/note-taker:document-work
+
+# Follow interactive prompts:
+# - Select organization (work context)
+# - Choose template type
+# - Select save location
+# - Provide project name
+# - Review and approve proposed content
+```
+
+**Result:** Structured note saved with automatic filename: `YYYY-MM-DD-project-name.md`
+
+### Course Content Creation
+
+Generate educational materials for data science courses:
+
+```bash
+# Write a textbook chapter
+/course-builder:write-chapter
+
+# Review chapter for technical accuracy
+/course-builder:review-chapter
+
+# Create companion Jupyter notebook
+/course-builder:create-companion-nb
+
+# Create lab assignment
+/course-builder:create-lab-nb
+
+# Create reading quiz
+/course-builder:create-quiz
+
+# Create presentation slides
+/course-builder:create-slides
+```
+
+**Result:** Complete educational content suite with chapters, notebooks, quizzes, and slides.
+
+## 🎯 Understanding the Architecture
+
+The marketplace uses a three-layer architecture where **commands** activate **agents** who use **skills** to perform analysis. Commands define workflows and output formats, while agents provide consistent domain expertise.
+
+> For detailed architectural principles including progressive disclosure and component relationships, see [Architecture Guide](./architecture.md).
+
+## 🛠️ Plugin Development
+
+To create a new plugin for the marketplace:
+
+```bash
+# Use the marketplace-dev plugin
+/marketplace-dev:design-plugin
+```
+
+This interactive session will:
+- Guide you through plugin architecture design
+- Identify reusable skills from existing plugins
+- Generate an implementation plan with token budget estimates
+- Create a checklist for building the plugin
+
+## 📋 Quick Reference
+
+| Command | Purpose | Time | Output |
+|---------|---------|------|--------|
+| `/git-workflow:create-branch` | Interactive branch creation | 2-3 min | Console |
+| `/git-workflow:draft-commit` | Generate commit message + stage files | 3-5 min | Console + git commit |
+| `/git-workflow:draft-pr` | Generate PR title + description | 5-7 min | Console + markdown |
+| `/git-workflow:pre-commit-check` | Run quality checks | 5-10 min | Console |
+| `/git-workflow:spec-issue` | Create implementation spec from issue | 10-15 min | Console/file/GitHub |
+| `/document-generator:generate-readme` | Create README from scratch | 10-15 min | README.md file |
+| `/document-generator:generate-adr` | Create Architecture Decision Record | 5-10 min | .md file |
+| `/document-generator:generate-changelog` | Create CHANGELOG.md | 5-10 min | CHANGELOG.md |
+| `/document-generator:update-changelog` | Update existing changelog | 3-5 min | CHANGELOG.md |
+| `/note-taker:document-work` | Create structured note from work session | 5-10 min | .md note file |
+| `/course-builder:write-chapter` | Write textbook chapter | 30-45 min | .md chapter file |
+| `/course-builder:create-lab-nb` | Create lab assignment notebook | 20-30 min | .ipynb file |
+| `/marketplace-dev:design-plugin` | Design new plugin | 15-20 min | Architecture plan |
+
+## 🧭 Support and Updates
+
+### Getting Help
+
+- **Documentation:** See [Architecture Guide](./architecture.md) for plugin design patterns
+- **Issues:** Report bugs or request features via GitHub Issues
+- **Source Code:** Review plugin source in repository
+
+### Staying Current
+
+- **Updates:** `git pull` from the marketplace repository, then reinstall plugins
+- **Changelog:** See commit history for recent changes
+
+### Contributing
+
+Want to add a new capability?
+
+1. Run `/marketplace-dev:design-plugin` to create an architecture plan
+2. Follow the generated implementation checklist
+3. Reuse skills from existing plugins where possible
+4. Submit a PR with your new plugin
+
+## 💡 Summary
+
+**Brad's Marketplace** helps developers:
+
+* **Automate workflows** - Git operations, documentation, and note-taking
+* **Enforce standards** - Commit messages, PR descriptions, documentation format
+* **Generate content** - READMEs, changelogs, ADRs, educational materials
+* **Build efficiently** - Reusable plugins with progressive knowledge loading
+* **Stay organized** - Structured notes and project documentation
+
+> "If it's part of your development workflow, there's a plugin in the marketplace to help you do it faster and better."

@@ -1,0 +1,9 @@
+{
+  "name": "note-taker",
+  "description": "Tools for documenting project work sessions with structured notes and templates",
+  "version": "1.0.0",
+  "author": {
+    "name": "Brad Boehmke"
+  },
+  "keywords": ["documentation", "notes", "templates", "work-sessions", "personal"]
+}

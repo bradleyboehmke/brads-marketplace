@@ -1,0 +1,9 @@
+{
+  "name": "marketplace-dev",
+  "description": "Tools for developing plugins that align with Personal marketplace architecture",
+  "version": "1.0.0",
+  "author": {
+    "name": "Brad Boehmke"
+  },
+  "keywords": ["development", "plugin-architecture", "marketplace", "personal", "meta-development"]
+}

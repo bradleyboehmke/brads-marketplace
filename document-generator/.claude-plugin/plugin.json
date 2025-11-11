@@ -1,0 +1,9 @@
+{
+  "name": "document-generator",
+  "description": "Generates various types of documentation including ADRs, architecture diagrams, changelogs, READMEs, tutorials, and API documentation for Personal projects",
+  "version": "1.2.0",
+  "author": {
+    "name": "Brad Boehmke"
+  },
+  "keywords": ["documentation", "adr", "diagrams", "changelog", "readme", "versioning", "tutorials", "mkdocs", "personal"]
+}

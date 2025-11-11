@@ -1,0 +1,9 @@
+{
+  "name": "git-workflow",
+  "description": "Enforce Standard Git and GitHub collaboration practices",
+  "version": "1.0.0",
+  "author": {
+    "name": "Brad Boehmke"
+  },
+  "keywords": ["git", "github", "workflow", "collaboration", "commits", "pull-requests", "issues", "personal"]
+}

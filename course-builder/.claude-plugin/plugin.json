@@ -1,0 +1,9 @@
+{
+  "name": "course-builder",
+  "description": "Tools for creating educational content for data science, ML, AI, and MLOps courses",
+  "version": "1.0.0",
+  "author": {
+    "name": "Brad Boehmke"
+  },
+  "keywords": ["education", "course-development", "data-science", "machine-learning", "mlops", "jupyter", "teaching", "personal"]
+}

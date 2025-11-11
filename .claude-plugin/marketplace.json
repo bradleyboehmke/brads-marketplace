@@ -1,103 +1,44 @@
 {
   "name": "brads-marketplace",
+  "description": "Brad's Custom Claude Plugins for Productivity, Development, and Education",
   "owner": {
-    "name": "Brad Boehmke",
-    "email": "boehmkbc@gmail.com",
-    "url": "https://github.com/bradleyboehmke"
-  },
-  "metadata": {
-    "description": "Brad's personal collection of Claude Code plugins for documenting and managing work at 84.51 and University of Cincinnati",
-    "version": "1.0.0"
+    "name": "Brad Boehmke"
   },
   "plugins": [
     {
-      "name": "note-taker",
-      "source": "./plugins/note-taker",
-      "description": "Automates note-taking by analyzing project work and creating structured notes using templates",
-      "version": "1.0.0",
-      "author": {
-        "name": "Brad Boehmke",
-        "url": "https://github.com/bradleyboehmke"
-      },
-      "homepage": "https://github.com/bradleyboehmke/brads-marketplace",
-      "repository": "https://github.com/bradleyboehmke/brads-marketplace",
-      "license": "MIT",
-      "keywords": [
-        "notes",
-        "documentation",
-        "templates",
-        "work-tracking"
-      ],
-      "category": "productivity",
-      "strict": false,
-      "commands": [
-        "./commands/document-work.md"
-      ],
-      "agents": [
-        "./agents/documentation-assistant.md"
-      ]
+      "name": "marketplace-dev",
+      "source": "./marketplace-dev",
+      "description": "Tools for developing plugins that align with Personal marketplace architecture",
+      "tags": ["development", "plugin-architecture", "marketplace", "personal", "meta-development"],
+      "strict": true
     },
     {
-      "name": "marketplace-dev",
-      "source": "./plugins/marketplace-dev",
-      "description": "Tools and expertise for building plugins that align with marketplace architecture",
-      "version": "1.0.0",
-      "author": {
-        "name": "Brad Boehmke",
-        "url": "https://github.com/bradleyboehmke"
-      },
-      "homepage": "https://github.com/bradleyboehmke/brads-marketplace",
-      "repository": "https://github.com/bradleyboehmke/brads-marketplace",
-      "license": "MIT",
-      "keywords": [
-        "plugin-development",
-        "marketplace",
-        "architecture",
-        "development"
-      ],
-      "category": "development",
-      "strict": false,
-      "commands": [
-        "./commands/create-plugin.md",
-        "./commands/validate-plugin.md"
-      ],
-      "agents": [
-        "./agents/plugin-architect.md"
-      ]
+      "name": "git-workflow",
+      "source": "./git-workflow",
+      "description": "Enforce Standard Git and GitHub collaboration practices",
+      "tags": ["git", "github", "workflow", "collaboration", "commits", "pull-requests", "issues", "personal"],
+      "strict": true
+    },
+    {
+      "name": "document-generator",
+      "source": "./document-generator",
+      "description": "Generates various types of documentation including ADRs, architecture diagrams, changelogs, READMEs, tutorials, and API documentation for Personal projects",
+      "tags": ["documentation", "adr", "diagrams", "changelog", "readme", "versioning", "tutorials", "mkdocs", "personal"],
+      "strict": true
+    },
+    {
+      "name": "note-taker",
+      "source": "./note-taker",
+      "description": "Tools for documenting project work sessions with structured notes and templates",
+      "tags": ["documentation", "notes", "templates", "work-sessions", "personal"],
+      "strict": true
     },
     {
       "name": "course-builder",
-      "source": "./plugins/course-builder",
-      "description": "Create educational content for data science courses including chapters, quizzes, notebooks, and slides",
-      "version": "1.0.0",
-      "author": {
-        "name": "Brad Boehmke",
-        "url": "https://github.com/bradleyboehmke"
-      },
-      "homepage": "https://github.com/bradleyboehmke/brads-marketplace",
-      "repository": "https://github.com/bradleyboehmke/brads-marketplace",
-      "license": "MIT",
-      "keywords": [
-        "education",
-        "data-science",
-        "course-creation",
-        "teaching"
-      ],
-      "category": "education",
-      "strict": false,
-      "commands": [
-        "./commands/write-chapter.md",
-        "./commands/review-chapter.md",
-        "./commands/create-companion-nb.md",
-        "./commands/create-lab-nb.md",
-        "./commands/create-quiz.md",
-        "./commands/create-slides.md",
-        "./commands/create-module-overview.md",
-        "./commands/create-ta-guide.md"
-      ],
-      "agents": [
-        "./agents/course-architect.md"
-      ]
+      "source": "./course-builder",
+      "description": "Tools for creating educational content for data science, ML, AI, and MLOps courses",
+      "tags": ["education", "course-development", "data-science", "machine-learning", "mlops", "jupyter", "teaching", "personal"],
+      "strict": true
     }
   ]
 }
