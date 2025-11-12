@@ -1,5 +1,9 @@
 # Brad's Claude Code Marketplace
 
+[![License](https://img.shields.io/badge/license-Personal%20Use-blue.svg)](#license)
+[![Plugins](https://img.shields.io/badge/plugins-5-green.svg)](#available-plugins)
+[![GitHub](https://img.shields.io/badge/github-brads--marketplace-black.svg)](https://github.com/bradleyboehmke/brads-marketplace)
+
 Personal collection of Claude Code plugins for productivity, development workflow automation, and documentation.
 
 ## Overview
@@ -16,131 +20,28 @@ This marketplace provides AI-powered agents, skills, and commands to accelerate 
 
 ```
 brads-marketplace/
-├── .claude-plugin/
-│   └── marketplace.json          # Plugin marketplace configuration
-├── course-builder/               # Educational content plugin
-│   ├── agents/
-│   ├── commands/
-│   └── skills/
-├── document-generator/           # Documentation generation plugin
-│   ├── agents/
-│   ├── commands/
-│   └── skills/
-├── git-workflow/                 # Git workflow automation plugin
-│   ├── agents/
-│   ├── commands/
-│   └── skills/
-├── marketplace-dev/              # Plugin development tools
-│   ├── agents/
-│   ├── commands/
-│   └── skills/
-├── note-taker/                   # Note-taking plugin
-│   └── commands/
-├── docs/                         # Comprehensive documentation
-│   ├── plugins.md
-│   └── usage.md
-└── README.md                     # This file
+├── .claude-plugin/        # Marketplace configuration
+├── {plugin-name}/         # Each plugin directory contains:
+│   ├── agents/           # Domain expert AI personas
+│   ├── commands/         # User-facing slash commands
+│   └── skills/           # Reusable knowledge modules
+├── docs/                 # Documentation (see below)
+└── README.md
 ```
+
+Plugins: `git-workflow`, `document-generator`, `marketplace-dev`, `note-taker`, `course-builder`
 
 ## Available Plugins
 
-### git-workflow
+| Plugin | Description | Key Commands |
+|--------|-------------|--------------|
+| **git-workflow** | Automate Git/GitHub workflows with standards enforcement | `draft-commit`, `draft-pr`, `create-branch`, `pre-commit-check` |
+| **document-generator** | Generate and maintain project documentation | `generate-readme`, `generate-changelog`, `generate-adr`, `generate-architecture-diagram` |
+| **marketplace-dev** | Build and validate marketplace plugins | `design-plugin`, `review-plugin`, `update-plugin-docs` |
+| **note-taker** | Create structured notes from work sessions | `document-work` |
+| **course-builder** | Create educational content for data science courses | `write-chapter`, `create-lab-nb`, `create-quiz`, `create-slides` |
 
-Enforce standard Git and GitHub collaboration practices with automated workflow assistance.
-
-**Usage:** `/git-workflow:draft-commit`, `/git-workflow:draft-pr`, `/git-workflow:create-branch`, etc.
-
-**Key Features:**
-- Interactive branch creation following naming conventions
-- Standards-compliant commit message generation
-- PR title and description drafting from branch changes
-- Pre-commit checks with project-aware validation
-- Commit and PR quality validation
-- GitHub issue specification planning
-
-**Commands:**
-- `create-branch` - Interactive branch creation with naming guidance
-- `draft-commit` - Generate commit messages and handle staging
-- `draft-pr` - Generate PR title and description from changes
-- `pre-commit-check` - Run comprehensive pre-commit validation
-- `spec-issue` - Create implementation specs from GitHub issues
-- `validate-commit` - Validate commit message quality
-- `validate-pr` - Validate PR readiness
-
-### document-generator
-
-Create and maintain project documentation following best practices.
-
-**Usage:** `/document-generator:generate-readme`, `/document-generator:generate-adr`, etc.
-
-**Key Features:**
-- README generation and validation
-- Changelog creation and updates (Keep a Changelog format)
-- Architecture Decision Records (MADR format)
-- Mermaid architecture diagrams
-
-**Commands:**
-- `generate-readme` - Create README from scratch
-- `update-readme` - Update existing README
-- `validate-readme` - Validate README standards
-- `generate-changelog` - Create new CHANGELOG.md
-- `update-changelog` - Update changelog with new entries
-- `validate-changelog` - Validate changelog format
-- `generate-adr` - Create Architecture Decision Records
-- `generate-architecture-diagram` - Create Mermaid diagrams
-
-### marketplace-dev
-
-Tools and expertise for building plugins that align with marketplace architecture.
-
-**Usage:** `/marketplace-dev:design-plugin`, `/marketplace-dev:review-plugin`, `/marketplace-dev:update-plugin-docs`
-
-**Key Features:**
-- Plugin architecture design consultation
-- Component redundancy and verbosity analysis
-- Documentation verification and updates
-- Comprehensive architecture principles and templates
-
-**Commands:**
-- `design-plugin` - Design new plugin architecture
-- `review-plugin` - Review plugin for compliance and quality
-- `update-plugin-docs` - Verify and update marketplace docs
-
-### note-taker
-
-Creates structured notes from project work using pre-defined templates.
-
-**Usage:** `/note-taker:document-work`
-
-**Key Features:**
-- Analyzes conversation history and git commits
-- Supports multiple template types
-- Interactive field-by-field content proposal
-- Automatic filename generation with date stamps
-
-### course-builder
-
-Educational content creation for data science, ML, AI, and MLOps courses.
-
-**Usage:** `/course-builder:write-chapter`, `/course-builder:create-lab-nb`, etc.
-
-**Key Features:**
-- Textbook chapter writing and review
-- Companion Jupyter notebooks
-- Lab assignments and TA guides
-- Reading comprehension quizzes
-- Presentation slides
-- Module overviews
-
-**Commands:**
-- `write-chapter` - Write textbook chapters
-- `review-chapter` - Review chapter quality
-- `create-companion-nb` - Create companion notebooks
-- `create-lab-nb` - Create lab assignments
-- `create-quiz` - Create reading quizzes
-- `create-slides` - Create presentation slides
-- `create-module-overview` - Create Canvas module overviews
-- `create-ta-guide` - Create TA guidance materials
+For detailed information about each plugin, see [Plugin Documentation](docs/capabilities/plugins.md).
 
 ## Installation
 
@@ -149,7 +50,7 @@ Educational content creation for data science, ML, AI, and MLOps courses.
 To add this marketplace to your Claude Code installation:
 
 ```bash
-claude plugin marketplace add https://github.com/USERNAME/brads-marketplace
+claude plugin marketplace add https://github.com/bradleyboehmke/brads-marketplace
 ```
 
 Or from a local directory:
@@ -197,50 +98,43 @@ cd /path/to/your/project
 /document-generator:update-changelog
 ```
 
-## Architecture Principles
+## Architecture
 
-This marketplace follows these design principles:
+Built on a three-layer architecture:
+- **Agents** - Domain expert AI personas (e.g., git-workflow-specialist, readme-author)
+- **Skills** - Reusable knowledge modules (e.g., commit standards, versioning rules)
+- **Commands** - User-facing workflows (e.g., `/git-workflow:draft-commit`)
 
-1. **Single Responsibility** - Each plugin does one thing well
-2. **Minimal Token Usage** - Lightweight components that load only what's needed
-3. **Composable** - Plugins can work independently or together
-4. **Progressive Disclosure** - Load metadata first, instructions when activated, resources on demand
-5. **Agent-Skill-Command Architecture** - Agents provide expertise, skills package knowledge, commands define workflows
+Key principles: Single responsibility, progressive disclosure, composability, minimal token usage.
 
-### Three-Layer Architecture
-
-- **Agents** - Domain expert personas (git-workflow-specialist, readme-author, plugin-architect)
-- **Skills** - Reusable knowledge modules (commit standards, changelog format, architecture principles)
-- **Commands** - User-facing workflows with parameters and interactive prompts
+For detailed architecture patterns, see [Architecture Guide](docs/architecture.md).
 
 ## Documentation
 
-For detailed information:
-- [Plugin Documentation](docs/plugins.md) - Detailed information about each plugin
-- [Usage Guide](docs/usage.md) - Comprehensive guide on installation and usage
+Comprehensive documentation is available in the `docs/` directory:
 
-## Adding New Plugins
+- **[Usage Guide](docs/usage.md)** - Installation, workflows, and examples
+- **[Architecture Guide](docs/architecture.md)** - Design principles and patterns
+- **[Plugins](docs/capabilities/plugins.md)** - Plugin catalog with features and commands
+- **[Agents](docs/capabilities/agents.md)** - AI agent personas and expertise
+- **[Skills](docs/capabilities/skills.md)** - Knowledge modules and reusability
+- **[Commands](docs/capabilities/commands.md)** - Complete command reference
 
-To add a new plugin:
+## Contributing
 
-1. Create a new directory at the root:
-   ```
-   your-plugin-name/
-   ├── commands/        # Slash commands
-   ├── agents/          # (optional) AI agents
-   └── skills/          # (optional) Agent skills
-   ```
+Want to add a new plugin? Use the built-in design tool:
 
-2. Add to `.claude-plugin/marketplace.json`:
-   ```json
-   {
-     "name": "your-plugin-name",
-     "source": "./your-plugin-name",
-     "description": "Brief description"
-   }
-   ```
+```bash
+/marketplace-dev:design-plugin
+```
 
-3. Document in `docs/plugins.md`
+This interactive command will guide you through plugin architecture, identify reusable skills, and generate an implementation plan.
+
+For detailed contribution guidelines, see [Architecture Guide](docs/architecture.md).
+
+## Bugs & Enhancements
+
+Found a bug or have a feature request? Please report it via [GitHub Issues](https://github.com/bradleyboehmke/brads-marketplace/issues).
 
 ## License
 

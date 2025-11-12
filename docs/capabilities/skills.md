@@ -177,6 +177,57 @@ Skills use a three-tier progressive disclosure structure:
 
 ---
 
+#### git-history-analysis
+
+**Purpose:** Git commit analysis for changelog and documentation generation
+
+**When to Use:** Extracting version history from git
+
+**Key Knowledge:**
+- Git log parsing
+- Commit categorization
+- Version detection
+- Date extraction
+- Change summarization
+
+**Used By:** `readme-author`, `adr-author` agents
+
+---
+
+#### version-validation
+
+**Purpose:** Validation rules for semantic and calendar versioning
+
+**When to Use:** Validating or auto-incrementing version numbers
+
+**Key Knowledge:**
+- Semantic versioning (SemVer) format
+- Calendar versioning (CalVer) format
+- Version increment rules
+- Version comparison logic
+- Date format validation
+
+**Used By:** `readme-author`, `adr-author` agents
+
+---
+
+#### diagram-analysis
+
+**Purpose:** Understanding system architecture to choose appropriate diagram types
+
+**When to Use:** Planning architecture diagrams
+
+**Key Knowledge:**
+- System architecture patterns
+- Diagram type selection
+- Scope determination
+- Component discovery
+- Visualization planning
+
+**Used By:** `mermaid-expert` agent
+
+---
+
 ### Marketplace Development Skills
 
 #### plugin-architecture-principles
@@ -397,6 +448,9 @@ Skills can be shared across multiple agents and plugins:
 | `readme-standards` | readme-author | document-generator |
 | `changelog-standards` | readme-author, adr-author | document-generator |
 | `mermaid-diagramming` | mermaid-expert | document-generator |
+| `git-history-analysis` | readme-author, adr-author | document-generator |
+| `version-validation` | readme-author, adr-author | document-generator |
+| `diagram-analysis` | mermaid-expert | document-generator |
 | `plugin-architecture-principles` | plugin-architect | marketplace-dev |
 | `progressive-disclosure` | plugin-architect | marketplace-dev |
 
